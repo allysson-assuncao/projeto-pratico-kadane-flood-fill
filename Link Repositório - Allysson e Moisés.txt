@@ -1,0 +1,6 @@
+Github: https://github.com/allysson-assuncao/projeto-pratico-kadane-flood-fill.git
+
+Alunos: Allysson Bruno Chaves Assunção e Moisés Emanuel Reis da Cruz
+Temas: 
+    - Vantagem Iterativa: Algoritmo de Kadane (Soma Máxima de Subarranjo)
+    - Vantagem Recursiva: Flood Fill (Preenchimento de Região)
