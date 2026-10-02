@@ -195,50 +195,63 @@ Bateria de 30 rodadas executadas com arrays pseudoaleatórios de inteiros entre 
 | **100.000** | 0.026452 s | 0.296927 s | **11.22x** | 418 bytes | 1.768 bytes | 19 frames |
 
 Os gráficos gerados estão disponíveis em:
-- [Gráfico Comparativo de Tempo de Execução](file:///C:/Users/anybo/Documents/Projects/projeto-pratico-kadane-flood-fill/kadane/benchmarks/results/grafico_tempo.png)
-- [Gráfico Comparativo de Consumo de Memória](file:///C:/Users/anybo/Documents/Projects/projeto-pratico-kadane-flood-fill/kadane/benchmarks/results/grafico_memoria.png)
+- [Gráfico Comparativo de Tempo de Execução](benchmarks/results/grafico_tempo.png)
+- [Gráfico Comparativo de Consumo de Memória](benchmarks/results/grafico_memoria.png)
 
 ---
 
 ## 8. Como Executar
 
-### Bloco 1 — Instalação das Dependências
-Na raiz do projeto:
-```powershell
+> **Dica Multiplataforma:** Para evitar problemas de caminho (`PATH`) com ferramentas instaladas via pip, utilize sempre o prefixo do interpretador (`python -m` no Windows ou `python3 -m` no Linux).
+
+### 🐧 Ambiente Linux (Bash / Shell)
+
+```bash
+# 1. Criação e ativação de ambiente virtual (recomendado em distros modernas / PEP 668)
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 2. Instalação das dependências
 pip install -r kadane/requirements.txt
+
+# 3. Execução dos testes automatizados com cobertura
+python3 -m pytest kadane/tests/ -v --cov=kadane.src --cov-report=term-missing
+
+# 4. Execução dos benchmarks e geração de gráficos
+python3 kadane/benchmarks/runner.py
+python3 kadane/benchmarks/plot.py
+
+# 5. Geração de traces para o visualizador
+python3 kadane/scripts/generate_traces.py
+
+# 6. Abrir visualizador web
+xdg-open kadane/visualizer/index.html || open kadane/visualizer/index.html
+# Ou, se estiver em ambiente headless / sem interface gráfica:
+# python3 -m http.server 8000
 ```
 
-### Bloco 2 — Execução dos Testes Automatizados (com Cobertura)
-Executa todos os 34 testes unitários e valida a equivalência estrita:
-```powershell
-pytest kadane/tests/ -v --cov=kadane.src --cov-report=term-missing
-```
+### 🪟 Ambiente Windows (PowerShell)
 
-### Bloco 3 — Execução dos Benchmarks e Geração de Gráficos
-Executa a bateria de medições e atualiza relatórios e gráficos:
 ```powershell
+# 1. Instalação das dependências
+pip install -r kadane/requirements.txt
+
+# 2. Execução dos testes automatizados com cobertura
+python -m pytest kadane/tests/ -v --cov=kadane.src --cov-report=term-missing
+
+# 3. Execução dos benchmarks e geração de gráficos
 python kadane/benchmarks/runner.py
 python kadane/benchmarks/plot.py
-```
 
-### Bloco 4 — Geração Automatizada de Traces para o Visualizador
-Gera os arquivos `.json` e o bundle standalone para o visualizador:
-```powershell
+# 4. Geração de traces para o visualizador
 python kadane/scripts/generate_traces.py
-```
 
-### Bloco 5 — Abrir o Visualizador Web Interativo
-Abra diretamente no navegador (funciona offline via `file://`):
-```powershell
-# Windows
+# 5. Abrir visualizador web
 start kadane/visualizer/index.html
-
-# Linux / macOS
-xdg-open kadane/visualizer/index.html || open kadane/visualizer/index.html
 ```
 
 ---
 
 ## 9. Roteiro para Apresentação Oral
 Para o roteiro detalhado com tempos e argumentos para a defesa do trabalho, consulte o documento:  
-👉 **[APRESENTACAO.md](file:///C:/Users/anybo/Documents/Projects/projeto-pratico-kadane-flood-fill/kadane/APRESENTACAO.md)**
+👉 **[APRESENTACAO.md](APRESENTACAO.md)**
