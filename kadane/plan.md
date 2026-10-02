@@ -3,7 +3,7 @@
 > **Problema:** Soma Máxima de Subarranjo (Algoritmo de Kadane)  
 > **Responsável:** Allysson Bruno Chaves Assunção  
 > **Versão do Plano:** 1.0 — 2026-10-02  
-> **Status:** 🟡 Aguardando Execução
+> **Status:** 🟢 100% Concluído e Validado
 
 ---
 
@@ -15,7 +15,7 @@
 | 2 | Bateria de Testes e Garantia de Equivalência | `test_iterative.py`, `test_recursive.py`, `test_equivalence.py` | `[x]` |
 | 3 | Framework de Benchmarking e Métricas Empíricas | `runner.py`, `plot.py`, `results/` | `[x]` |
 | 4 | Visualizador Web Interativo Standalone | `index.html`, `app.js`, `style.css` | `[x]` |
-| 5 | Documentação, Integração e Apresentação Final | `README.md` (atualizado), `requirements.txt`, roteiro oral | `[ ]` |
+| 5 | Documentação, Integração e Apresentação Final | `README.md` (atualizado), `requirements.txt`, roteiro oral | `[x]` |
 
 ---
 
@@ -579,11 +579,11 @@ Incluir no final do README (ou em `kadane/APRESENTACAO.md`) um roteiro estrutura
 | 5 | Análise comparativa e conclusão: por que Iterativo vence | 2 min | Tabela `report.md` |
 
 **DoD da Fase 5:**
-- [ ] `requirements.txt` criado com todas as dependências versionadas.
-- [ ] `kadane/scripts/generate_traces.py` criado e documentado.
-- [ ] `README.md` atualizado com seção "Como Executar" contendo todos os 5 blocos de comando.
-- [ ] Roteiro de apresentação incluído (no README ou em `APRESENTACAO.md`).
-- [ ] Todo o fluxo (`install → test → benchmark → generate_traces → open visualizer`) testado de ponta a ponta sem erros.
+- [x] `requirements.txt` criado com todas as dependências versionadas.
+- [x] `kadane/scripts/generate_traces.py` criado e documentado.
+- [x] `README.md` atualizado com seção "Como Executar" contendo todos os 5 blocos de comando.
+- [x] Roteiro de apresentação incluído (no README ou em `APRESENTACAO.md`).
+- [x] Todo o fluxo (`install → test → benchmark → generate_traces → open visualizer`) testado de ponta a ponta sem erros.
 
 ---
 
@@ -617,11 +617,11 @@ Fase 4 — Visualizador
 [x] 4 traces JSON de demonstração gerados em data/
 
 Fase 5 — Documentação
-[ ] requirements.txt criado
-[ ] generate_traces.py criado
-[ ] README.md atualizado com How-To completo
-[ ] Roteiro de apresentação escrito
-[ ] Fluxo end-to-end testado
+[x] requirements.txt criado
+[x] generate_traces.py criado
+[x] README.md atualizado com How-To completo
+[x] Roteiro de apresentação escrito
+[x] Fluxo end-to-end testado
 ```
 
 ---

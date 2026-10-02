@@ -137,30 +137,108 @@ O laço iterativo percorre o vetor em ordem contígua na memória. Isso ativa os
 
 ---
 
-## 6. Proposta de Estrutura do Diretório `kadane/`
+## 6. Estrutura Consolidada do Módulo `kadane/`
 
 ```text
 kadane/
 │
-├── README.md               <-- Este documento (apresentação, teoria e justificativas)
-├── src/                    <-- Código fonte dos algoritmos
-│   ├── __init__.py
-│   ├── iterative_kadane.py <-- Implementação iterativa O(n), O(1) com índices
-│   └── recursive_kadane.py <-- Implementação recursiva (Divisão & Conquista / Cauda)
+├── README.md                  # Este documento (apresentação, teoria e guia de execução)
+├── APRESENTACAO.md            # Roteiro detalhado para apresentação e defesa oral
+├── plan.md                    # Plano de implementação auditado e executado
+├── requirements.txt           # Dependências do projeto (pytest, pytest-cov, matplotlib)
 │
-├── tests/                  <-- Testes unitários de validação
-│   ├── __init__.py
-│   └── test_kadane.py      <-- Casos normais, negativos, unitários, zeros
+├── src/                       # Módulos principais dos algoritmos
+│   ├── __init__.py            # Exportações públicas do pacote
+│   ├── types.py               # Dataclasses imutáveis (SubarrayResult, StepEvent, CallStackFrame)
+│   ├── iterative.py           # Algoritmo de Kadane clássico O(n), O(1)
+│   ├── recursive.py           # Divisão e Conquista O(n log n), O(log n) pilha
+│   └── tracer.py              # Coletor desacoplado ExecutionTracer com exportação JSON
 │
-└── benchmarks/             <-- Scripts de medição empírica e gráficos
-    ├── benchmark.py        <-- Medição de tempo e memória com arrays crescentes
-    └── results/            <-- Gráficos comparativos (tempo vs n, memória vs n)
+├── tests/                     # Bateria de testes automatizados com pytest (100% cobertura)
+│   ├── __init__.py
+│   ├── test_iterative.py      # Testes do algoritmo iterativo e tracer
+│   ├── test_recursive.py      # Testes da divisão e conquista e call stack
+│   └── test_equivalence.py    # Teste de equivalência estrita (200+ casos aleatórios)
+│
+├── benchmarks/                # Framework de medição empírica de desempenho
+│   ├── runner.py              # Executor de 30 rodadas com perf_counter e tracemalloc
+│   ├── plot.py                # Gerador de gráficos PNG em alta resolução
+│   └── results/               # Dados brutos (JSON), relatórios (MD, TeX) e gráficos (PNG)
+│       ├── benchmark_data.json
+│       ├── report.md
+│       ├── table.tex
+│       ├── grafico_tempo.png
+│       └── grafico_memoria.png
+│
+├── scripts/                   # Scripts utilitários
+│   └── generate_traces.py     # Gerador automatizado de traces JSON e bundle JS
+│
+└── visualizer/                # Interface web interativa standalone (zero dependência de servidor)
+    ├── index.html             # UI com Tailwind CDN, array animado e Call Stack Inspector
+    ├── app.js                 # Motor de renderização reativo e controles de reprodução
+    ├── style.css              # Transições suaves e animações de push/pop
+    └── data/                  # Traces JSON pré-processados e bundle standalone
 ```
 
 ---
 
-## 7. Próximos Passos Sugeridos
-1. **Confirmação da Linguagem:** Validar se a linguagem padrão para a implementação do projeto será **Python**, **C**, **C++** ou **Java** (sugestão: Python para facilitar benchmarks e gráficos com matplotlib, ou C/C++ se o foco do professor for estritamente desempenho nativo).
-2. **Implementação dos Algoritmos:** Desenvolver as duas abordagens no diretório `src/`.
-3. **Bateria de Testes:** Garantir que ambos os métodos entreguem saídas idênticas para qualquer vetor.
-4. **Coleta de Métricas:** Medir o impacto da recursão vs. iteração em cenários com diferentes ordens de grandeza de $n$.
+## 7. Resultados Empíricos Obtidos
+
+Bateria de 30 rodadas executadas com arrays pseudoaleatórios de inteiros entre $[-1000, 1000]$:
+
+| $N$ | Kadane Iterativo (Tempo) | Divisão e Conquista (Tempo) | **Speedup Iterativo** | Pico Memória (Iterativo) | Pico Memória (Recursivo) | Call Stack (Recursivo) |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **10** | 0.000005 s | 0.000022 s | **4.10x** | 456 bytes | 520 bytes | 6 frames |
+| **100** | 0.000033 s | 0.000234 s | **7.17x** | 397 bytes | 808 bytes | 9 frames |
+| **1.000** | 0.000282 s | 0.002652 s | **9.41x** | 402 bytes | 1.096 bytes | 12 frames |
+| **10.000** | 0.002644 s | 0.028370 s | **10.73x** | 411 bytes | 1.480 bytes | 16 frames |
+| **100.000** | 0.026452 s | 0.296927 s | **11.22x** | 418 bytes | 1.768 bytes | 19 frames |
+
+Os gráficos gerados estão disponíveis em:
+- [Gráfico Comparativo de Tempo de Execução](file:///C:/Users/anybo/Documents/Projects/projeto-pratico-kadane-flood-fill/kadane/benchmarks/results/grafico_tempo.png)
+- [Gráfico Comparativo de Consumo de Memória](file:///C:/Users/anybo/Documents/Projects/projeto-pratico-kadane-flood-fill/kadane/benchmarks/results/grafico_memoria.png)
+
+---
+
+## 8. Como Executar
+
+### Bloco 1 — Instalação das Dependências
+Na raiz do projeto:
+```powershell
+pip install -r kadane/requirements.txt
+```
+
+### Bloco 2 — Execução dos Testes Automatizados (com Cobertura)
+Executa todos os 34 testes unitários e valida a equivalência estrita:
+```powershell
+pytest kadane/tests/ -v --cov=kadane.src --cov-report=term-missing
+```
+
+### Bloco 3 — Execução dos Benchmarks e Geração de Gráficos
+Executa a bateria de medições e atualiza relatórios e gráficos:
+```powershell
+python kadane/benchmarks/runner.py
+python kadane/benchmarks/plot.py
+```
+
+### Bloco 4 — Geração Automatizada de Traces para o Visualizador
+Gera os arquivos `.json` e o bundle standalone para o visualizador:
+```powershell
+python kadane/scripts/generate_traces.py
+```
+
+### Bloco 5 — Abrir o Visualizador Web Interativo
+Abra diretamente no navegador (funciona offline via `file://`):
+```powershell
+# Windows
+start kadane/visualizer/index.html
+
+# Linux / macOS
+xdg-open kadane/visualizer/index.html || open kadane/visualizer/index.html
+```
+
+---
+
+## 9. Roteiro para Apresentação Oral
+Para o roteiro detalhado com tempos e argumentos para a defesa do trabalho, consulte o documento:  
+👉 **[APRESENTACAO.md](file:///C:/Users/anybo/Documents/Projects/projeto-pratico-kadane-flood-fill/kadane/APRESENTACAO.md)**

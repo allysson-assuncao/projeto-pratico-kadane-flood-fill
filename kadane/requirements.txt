@@ -1,0 +1,4 @@
+# Dependências do Projeto Kadane
+pytest>=8.0.0
+pytest-cov>=6.0.0
+matplotlib>=3.9.0
