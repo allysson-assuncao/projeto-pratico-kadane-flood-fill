@@ -11,7 +11,7 @@
 
 | # | Fase | Arquivos Principais | Status |
 |---|------|----------------------|--------|
-| 1 | Modelagem de Dados, Interfaces e Algoritmos Core | `types.py`, `iterative.py`, `recursive.py`, `tracer.py` | `[ ]` |
+| 1 | Modelagem de Dados, Interfaces e Algoritmos Core | `types.py`, `iterative.py`, `recursive.py`, `tracer.py` | `[x]` |
 | 2 | Bateria de Testes e Garantia de Equivalência | `test_iterative.py`, `test_recursive.py`, `test_equivalence.py` | `[ ]` |
 | 3 | Framework de Benchmarking e Métricas Empíricas | `runner.py`, `plot.py`, `results/` | `[ ]` |
 | 4 | Visualizador Web Interativo Standalone | `index.html`, `app.js`, `style.css` | `[ ]` |
@@ -89,10 +89,10 @@ kadane/src/
 | `depth` | `int` | Profundidade na árvore de recursão (0 = raiz) |
 
 **Definition of Done (DoD) da tarefa 1.2:**
-- [ ] Arquivo `types.py` criado com as três dataclasses acima.
-- [ ] Todas as dataclasses têm type hints completos e docstring de módulo explicando o propósito.
-- [ ] `from kadane.src.types import SubarrayResult, StepEvent, CallStackFrame` funciona sem erro.
-- [ ] `SubarrayResult` é imutável (modificar qualquer campo levanta `FrozenInstanceError`).
+- [x] Arquivo `types.py` criado com as três dataclasses acima.
+- [x] Todas as dataclasses têm type hints completos e docstring de módulo explicando o propósito.
+- [x] `from kadane.src.types import SubarrayResult, StepEvent, CallStackFrame` funciona sem erro.
+- [x] `SubarrayResult` é imutável (modificar qualquer campo levanta `FrozenInstanceError`).
 
 ---
 
@@ -125,10 +125,10 @@ def kadane_iterative(
 - Sem tracer: desempenho puro, zero overhead.
 
 **DoD da tarefa 1.3:**
-- [ ] Função `kadane_iterative` implementada e exportada em `src/__init__.py`.
-- [ ] Complexidade temporal $O(n)$ e espacial auxiliar $O(1)$ (excluindo tracer).
-- [ ] Retorna `SubarrayResult` correto para todos os casos de contrato da tabela acima.
-- [ ] Não importa `tracer.py` diretamente (injeção de dependência).
+- [x] Função `kadane_iterative` implementada e exportada em `src/__init__.py`.
+- [x] Complexidade temporal $O(n)$ e espacial auxiliar $O(1)$ (excluindo tracer).
+- [x] Retorna `SubarrayResult` correto para todos os casos de contrato da tabela acima.
+- [x] Não importa `tracer.py` diretamente (injeção de dependência).
 
 ---
 
@@ -173,10 +173,10 @@ def _max_subarray_rec(
 - O frame incluído no evento deve carregar `low`, `high`, `mid`, `depth` e `partial_result` (no `"pop"`).
 
 **DoD da tarefa 1.4:**
-- [ ] Função `kadane_recursive` e auxiliares implementadas.
-- [ ] Profundidade máxima de recursão para $N = 10^4$: $\leq \lceil \log_2 N \rceil + 2 = 16$ frames.
-- [ ] Resultado `max_sum` idêntico ao iterativo para qualquer entrada (validado nos testes de equivalência).
-- [ ] Eventos de push/pop emitidos corretamente no tracer (validado por inspeção em testes unitários).
+- [x] Função `kadane_recursive` e auxiliares implementadas.
+- [x] Profundidade máxima de recursão para $N = 10^4$: $\leq \lceil \log_2 N \rceil + 2 = 16$ frames.
+- [x] Resultado `max_sum` idêntico ao iterativo para qualquer entrada (validado nos testes de equivalência).
+- [x] Eventos de push/pop emitidos corretamente no tracer (validado por inspeção em testes unitários).
 
 ---
 
@@ -234,10 +234,10 @@ class ExecutionTracer:
 ```
 
 **DoD da tarefa 1.5:**
-- [ ] `ExecutionTracer` criado com as 5 operações acima.
-- [ ] `to_json()` produz JSON válido que passa em `json.loads()` sem exceção.
-- [ ] O schema de saída está em conformidade com a especificação acima (validar com assertions nos testes de tracer).
-- [ ] `reset()` limpa completamente a lista interna; chamadas subsequentes produzem trace vazio.
+- [x] `ExecutionTracer` criado com as 5 operações acima.
+- [x] `to_json()` produz JSON válido que passa em `json.loads()` sem exceção.
+- [x] O schema de saída está em conformidade com a especificação acima (validar com assertions nos testes de tracer).
+- [x] `reset()` limpa completamente a lista interna; chamadas subsequentes produzem trace vazio.
 
 ---
 
@@ -591,10 +591,10 @@ Incluir no final do README (ou em `kadane/APRESENTACAO.md`) um roteiro estrutura
 
 ```
 Fase 1 — Core
-[ ] types.py criado com SubarrayResult, StepEvent, CallStackFrame
-[ ] iterative.py com kadane_iterative e injeção de tracer
-[ ] recursive.py com kadane_recursive, _max_crossing_subarray, _max_subarray_rec
-[ ] tracer.py com ExecutionTracer (record, get_trace, to_json, save, reset)
+[x] types.py criado com SubarrayResult, StepEvent, CallStackFrame
+[x] iterative.py com kadane_iterative e injeção de tracer
+[x] recursive.py com kadane_recursive, _max_crossing_subarray, _max_subarray_rec
+[x] tracer.py com ExecutionTracer (record, get_trace, to_json, save, reset)
 
 Fase 2 — Testes
 [ ] test_iterative.py com 10 cenários + testes de tracer
