@@ -1,0 +1,83 @@
+{
+  "timestamp": "2026-10-02T13:40:12.889574",
+  "n_values": [
+    10,
+    100,
+    1000,
+    10000,
+    100000
+  ],
+  "num_rounds": 30,
+  "seed": 42,
+  "value_range": [
+    -1000,
+    1000
+  ],
+  "results": [
+    {
+      "n": 10,
+      "iter_time_mean": 5.279999944226195e-06,
+      "iter_time_stdev": 2.205698301007631e-06,
+      "iter_peak_mem": 456,
+      "iter_frames": 1,
+      "rec_time_mean": 2.1630000264849514e-05,
+      "rec_time_stdev": 1.2611294053994052e-06,
+      "rec_peak_mem": 520,
+      "rec_frames": 6,
+      "speedup": 4.096591002524996,
+      "recursion_error": false
+    },
+    {
+      "n": 100,
+      "iter_time_mean": 3.260000012232922e-05,
+      "iter_time_stdev": 2.5138239377048812e-06,
+      "iter_peak_mem": 397,
+      "iter_frames": 1,
+      "rec_time_mean": 0.00023384000014630145,
+      "rec_time_stdev": 3.106677730633671e-06,
+      "rec_peak_mem": 808,
+      "rec_frames": 9,
+      "speedup": 7.173006112540896,
+      "recursion_error": false
+    },
+    {
+      "n": 1000,
+      "iter_time_mean": 0.0002817366671176084,
+      "iter_time_stdev": 1.384170324842049e-05,
+      "iter_peak_mem": 402,
+      "iter_frames": 1,
+      "rec_time_mean": 0.002652179999737806,
+      "rec_time_stdev": 7.444793309776725e-05,
+      "rec_peak_mem": 1096,
+      "rec_frames": 12,
+      "speedup": 9.413684157166088,
+      "recursion_error": false
+    },
+    {
+      "n": 10000,
+      "iter_time_mean": 0.0026441533335552474,
+      "iter_time_stdev": 7.188016209033175e-05,
+      "iter_peak_mem": 411,
+      "iter_frames": 1,
+      "rec_time_mean": 0.02836971999980354,
+      "rec_time_stdev": 0.0005384125173071957,
+      "rec_peak_mem": 1480,
+      "rec_frames": 16,
+      "speedup": 10.729226493706582,
+      "recursion_error": false
+    },
+    {
+      "n": 100000,
+      "iter_time_mean": 0.026452440000139178,
+      "iter_time_stdev": 0.0005371397242101566,
+      "iter_peak_mem": 418,
+      "iter_frames": 1,
+      "rec_time_mean": 0.2969272100000429,
+      "rec_time_stdev": 0.0017590954000242845,
+      "rec_peak_mem": 1768,
+      "rec_frames": 19,
+      "speedup": 11.22494597846099,
+      "recursion_error": false
+    }
+  ]
+}

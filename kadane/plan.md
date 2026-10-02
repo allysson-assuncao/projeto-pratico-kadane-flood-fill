@@ -13,7 +13,7 @@
 |---|------|----------------------|--------|
 | 1 | Modelagem de Dados, Interfaces e Algoritmos Core | `types.py`, `iterative.py`, `recursive.py`, `tracer.py` | `[x]` |
 | 2 | Bateria de Testes e Garantia de Equivalência | `test_iterative.py`, `test_recursive.py`, `test_equivalence.py` | `[x]` |
-| 3 | Framework de Benchmarking e Métricas Empíricas | `runner.py`, `plot.py`, `results/` | `[ ]` |
+| 3 | Framework de Benchmarking e Métricas Empíricas | `runner.py`, `plot.py`, `results/` | `[x]` |
 | 4 | Visualizador Web Interativo Standalone | `index.html`, `app.js`, `style.css` | `[ ]` |
 | 5 | Documentação, Integração e Apresentação Final | `README.md` (atualizado), `requirements.txt`, roteiro oral | `[ ]` |
 
@@ -375,11 +375,11 @@ Dependência: `matplotlib`. Deve ser importado somente neste arquivo (não em `r
 - **Labels:** título, eixos e legenda em português
 
 **DoD da Fase 3:**
-- [ ] `python kadane/benchmarks/runner.py` executa sem travar (inclusive capturando `RecursionError`).
-- [ ] Arquivos `results/report.md` e `results/table.tex` são gerados automaticamente.
-- [ ] `python kadane/benchmarks/plot.py` gera `grafico_tempo.png` e `grafico_memoria.png` em `results/`.
-- [ ] O Speedup calculado para $N = 10^4$ é $> 1.0$ (iterativo mais rápido) nos dados coletados.
-- [ ] Os gráficos têm título, labels de eixo e legenda em português.
+- [x] `python kadane/benchmarks/runner.py` executa sem travar (inclusive capturando `RecursionError`).
+- [x] Arquivos `results/report.md` e `results/table.tex` são gerados automaticamente.
+- [x] `python kadane/benchmarks/plot.py` gera `grafico_tempo.png` e `grafico_memoria.png` em `results/`.
+- [x] O Speedup calculado para $N = 10^4$ é $> 1.0$ (iterativo mais rápido) nos dados coletados.
+- [x] Os gráficos têm título, labels de eixo e legenda em português.
 
 ---
 
@@ -603,10 +603,10 @@ Fase 2 — Testes
 [x] Cobertura >= 90% confirmada
 
 Fase 3 — Benchmarks
-[ ] runner.py coleta tempo, memória, profundidade de pilha
-[ ] runner.py captura RecursionError e continua
-[ ] report.md e table.tex gerados automaticamente
-[ ] plot.py gera grafico_tempo.png e grafico_memoria.png
+[x] runner.py coleta tempo, memória, profundidade de pilha
+[x] runner.py captura RecursionError e continua
+[x] report.md e table.tex gerados automaticamente
+[x] plot.py gera grafico_tempo.png e grafico_memoria.png
 
 Fase 4 — Visualizador
 [ ] index.html standalone com layout 3 colunas
