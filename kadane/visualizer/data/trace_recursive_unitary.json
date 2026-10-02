@@ -1,0 +1,59 @@
+{
+  "algorithm": "recursive",
+  "input_array": [
+    42
+  ],
+  "final_result": {
+    "max_sum": 42,
+    "start_idx": 0,
+    "end_idx": 0
+  },
+  "steps": [
+    {
+      "step": 0,
+      "algorithm": "recursive",
+      "current_idx": 0,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 0,
+      "active_end": 0,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 0,
+          "mid": null,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [0..0], profundidade=0"
+    },
+    {
+      "step": 1,
+      "algorithm": "recursive",
+      "current_idx": 0,
+      "max_current": 42,
+      "max_global": 42,
+      "active_start": 0,
+      "active_end": 0,
+      "call_stack": [],
+      "event_type": "pop",
+      "annotation": "POP (Caso Base): elemento unitário A[0] = 42"
+    },
+    {
+      "step": 2,
+      "algorithm": "recursive",
+      "current_idx": null,
+      "max_current": 42,
+      "max_global": 42,
+      "active_start": 0,
+      "active_end": 0,
+      "call_stack": [],
+      "event_type": "result",
+      "annotation": "Execução recursiva finalizada. Soma máxima = 42 no intervalo [0..0]."
+    }
+  ]
+}

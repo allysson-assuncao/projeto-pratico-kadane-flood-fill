@@ -1,0 +1,245 @@
+{
+  "algorithm": "iterative",
+  "input_array": [
+    -2,
+    1,
+    -3,
+    4,
+    -1,
+    2,
+    1,
+    -5,
+    4
+  ],
+  "final_result": {
+    "max_sum": 6,
+    "start_idx": 3,
+    "end_idx": 6
+  },
+  "steps": [
+    {
+      "step": 0,
+      "algorithm": "iterative",
+      "current_idx": 0,
+      "max_current": -2,
+      "max_global": -2,
+      "active_start": 0,
+      "active_end": 0,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "kadane_iterative",
+          "low": 0,
+          "high": 8,
+          "mid": null,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Inicialização no elemento A[0] = -2"
+    },
+    {
+      "step": 1,
+      "algorithm": "iterative",
+      "current_idx": 1,
+      "max_current": 1,
+      "max_global": 1,
+      "active_start": 1,
+      "active_end": 1,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "kadane_iterative",
+          "low": 0,
+          "high": 8,
+          "mid": null,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Reiniciou subarranjo em A[1] = 1 (acumulado anterior era negativo) -> Novo recorde global: 1 no intervalo [1..1]"
+    },
+    {
+      "step": 2,
+      "algorithm": "iterative",
+      "current_idx": 2,
+      "max_current": -2,
+      "max_global": 1,
+      "active_start": 1,
+      "active_end": 2,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "kadane_iterative",
+          "low": 0,
+          "high": 8,
+          "mid": null,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Estendeu subarranjo somando A[2] = -3 (novo acumulado = -2)"
+    },
+    {
+      "step": 3,
+      "algorithm": "iterative",
+      "current_idx": 3,
+      "max_current": 4,
+      "max_global": 4,
+      "active_start": 3,
+      "active_end": 3,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "kadane_iterative",
+          "low": 0,
+          "high": 8,
+          "mid": null,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Reiniciou subarranjo em A[3] = 4 (acumulado anterior era negativo) -> Novo recorde global: 4 no intervalo [3..3]"
+    },
+    {
+      "step": 4,
+      "algorithm": "iterative",
+      "current_idx": 4,
+      "max_current": 3,
+      "max_global": 4,
+      "active_start": 3,
+      "active_end": 4,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "kadane_iterative",
+          "low": 0,
+          "high": 8,
+          "mid": null,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Estendeu subarranjo somando A[4] = -1 (novo acumulado = 3)"
+    },
+    {
+      "step": 5,
+      "algorithm": "iterative",
+      "current_idx": 5,
+      "max_current": 5,
+      "max_global": 5,
+      "active_start": 3,
+      "active_end": 5,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "kadane_iterative",
+          "low": 0,
+          "high": 8,
+          "mid": null,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Estendeu subarranjo somando A[5] = 2 (novo acumulado = 5) -> Novo recorde global: 5 no intervalo [3..5]"
+    },
+    {
+      "step": 6,
+      "algorithm": "iterative",
+      "current_idx": 6,
+      "max_current": 6,
+      "max_global": 6,
+      "active_start": 3,
+      "active_end": 6,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "kadane_iterative",
+          "low": 0,
+          "high": 8,
+          "mid": null,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Estendeu subarranjo somando A[6] = 1 (novo acumulado = 6) -> Novo recorde global: 6 no intervalo [3..6]"
+    },
+    {
+      "step": 7,
+      "algorithm": "iterative",
+      "current_idx": 7,
+      "max_current": 1,
+      "max_global": 6,
+      "active_start": 3,
+      "active_end": 7,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "kadane_iterative",
+          "low": 0,
+          "high": 8,
+          "mid": null,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Estendeu subarranjo somando A[7] = -5 (novo acumulado = 1)"
+    },
+    {
+      "step": 8,
+      "algorithm": "iterative",
+      "current_idx": 8,
+      "max_current": 5,
+      "max_global": 6,
+      "active_start": 3,
+      "active_end": 8,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "kadane_iterative",
+          "low": 0,
+          "high": 8,
+          "mid": null,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Estendeu subarranjo somando A[8] = 4 (novo acumulado = 5)"
+    },
+    {
+      "step": 9,
+      "algorithm": "iterative",
+      "current_idx": null,
+      "max_current": 5,
+      "max_global": 6,
+      "active_start": 3,
+      "active_end": 6,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "kadane_iterative",
+          "low": 0,
+          "high": 8,
+          "mid": null,
+          "partial_result": {
+            "max_sum": 6,
+            "start_idx": 3,
+            "end_idx": 6
+          },
+          "depth": 0
+        }
+      ],
+      "event_type": "result",
+      "annotation": "Execução finalizada com sucesso. Soma máxima = 6 no intervalo [3..6]."
+    }
+  ]
+}

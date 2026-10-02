@@ -1,0 +1,1288 @@
+{
+  "algorithm": "recursive",
+  "input_array": [
+    0,
+    -1,
+    2,
+    0,
+    3,
+    -2
+  ],
+  "final_result": {
+    "max_sum": 5,
+    "start_idx": 2,
+    "end_idx": 4
+  },
+  "steps": [
+    {
+      "step": 0,
+      "algorithm": "recursive",
+      "current_idx": 2,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 0,
+      "active_end": 5,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [0..5], profundidade=0"
+    },
+    {
+      "step": 1,
+      "algorithm": "recursive",
+      "current_idx": 1,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 0,
+      "active_end": 2,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [0..2], profundidade=1"
+    },
+    {
+      "step": 2,
+      "algorithm": "recursive",
+      "current_idx": 0,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 0,
+      "active_end": 1,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 2,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 1,
+          "mid": 0,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [0..1], profundidade=2"
+    },
+    {
+      "step": 3,
+      "algorithm": "recursive",
+      "current_idx": 0,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 0,
+      "active_end": 0,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 2,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 1,
+          "mid": 0,
+          "partial_result": null,
+          "depth": 2
+        },
+        {
+          "frame_id": 3,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 0,
+          "mid": null,
+          "partial_result": null,
+          "depth": 3
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [0..0], profundidade=3"
+    },
+    {
+      "step": 4,
+      "algorithm": "recursive",
+      "current_idx": 0,
+      "max_current": 0,
+      "max_global": 0,
+      "active_start": 0,
+      "active_end": 0,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 2,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 1,
+          "mid": 0,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "pop",
+      "annotation": "POP (Caso Base): elemento unitário A[0] = 0"
+    },
+    {
+      "step": 5,
+      "algorithm": "recursive",
+      "current_idx": 1,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 1,
+      "active_end": 1,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 2,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 1,
+          "mid": 0,
+          "partial_result": null,
+          "depth": 2
+        },
+        {
+          "frame_id": 4,
+          "fn_name": "_max_subarray_rec",
+          "low": 1,
+          "high": 1,
+          "mid": null,
+          "partial_result": null,
+          "depth": 3
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [1..1], profundidade=3"
+    },
+    {
+      "step": 6,
+      "algorithm": "recursive",
+      "current_idx": 1,
+      "max_current": -1,
+      "max_global": -1,
+      "active_start": 1,
+      "active_end": 1,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 2,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 1,
+          "mid": 0,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "pop",
+      "annotation": "POP (Caso Base): elemento unitário A[1] = -1"
+    },
+    {
+      "step": 7,
+      "algorithm": "recursive",
+      "current_idx": 0,
+      "max_current": 0,
+      "max_global": 0,
+      "active_start": 0,
+      "active_end": 0,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 2,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 1,
+          "mid": 0,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à esquerda: A[0] = 0, acumulado = 0, melhor à esquerda = 0"
+    },
+    {
+      "step": 8,
+      "algorithm": "recursive",
+      "current_idx": 1,
+      "max_current": -1,
+      "max_global": -1,
+      "active_start": 1,
+      "active_end": 1,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 2,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 1,
+          "mid": 0,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à direita: A[1] = -1, acumulado = -1, melhor à direita = -1"
+    },
+    {
+      "step": 9,
+      "algorithm": "recursive",
+      "current_idx": null,
+      "max_current": 0,
+      "max_global": 0,
+      "active_start": 0,
+      "active_end": 0,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "pop",
+      "annotation": "POP: Retorno do intervalo [0..1]: melhor soma = 0 em [0..0]"
+    },
+    {
+      "step": 10,
+      "algorithm": "recursive",
+      "current_idx": 2,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 2,
+      "active_end": 2,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 5,
+          "fn_name": "_max_subarray_rec",
+          "low": 2,
+          "high": 2,
+          "mid": null,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [2..2], profundidade=2"
+    },
+    {
+      "step": 11,
+      "algorithm": "recursive",
+      "current_idx": 2,
+      "max_current": 2,
+      "max_global": 2,
+      "active_start": 2,
+      "active_end": 2,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "pop",
+      "annotation": "POP (Caso Base): elemento unitário A[2] = 2"
+    },
+    {
+      "step": 12,
+      "algorithm": "recursive",
+      "current_idx": 1,
+      "max_current": -1,
+      "max_global": -1,
+      "active_start": 1,
+      "active_end": 1,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à esquerda: A[1] = -1, acumulado = -1, melhor à esquerda = -1"
+    },
+    {
+      "step": 13,
+      "algorithm": "recursive",
+      "current_idx": 0,
+      "max_current": -1,
+      "max_global": -1,
+      "active_start": 0,
+      "active_end": 1,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à esquerda: A[0] = 0, acumulado = -1, melhor à esquerda = -1"
+    },
+    {
+      "step": 14,
+      "algorithm": "recursive",
+      "current_idx": 2,
+      "max_current": 2,
+      "max_global": 2,
+      "active_start": 2,
+      "active_end": 2,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 1,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 2,
+          "mid": 1,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à direita: A[2] = 2, acumulado = 2, melhor à direita = 2"
+    },
+    {
+      "step": 15,
+      "algorithm": "recursive",
+      "current_idx": null,
+      "max_current": 2,
+      "max_global": 2,
+      "active_start": 2,
+      "active_end": 2,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "pop",
+      "annotation": "POP: Retorno do intervalo [0..2]: melhor soma = 2 em [2..2]"
+    },
+    {
+      "step": 16,
+      "algorithm": "recursive",
+      "current_idx": 4,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 3,
+      "active_end": 5,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [3..5], profundidade=1"
+    },
+    {
+      "step": 17,
+      "algorithm": "recursive",
+      "current_idx": 3,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 3,
+      "active_end": 4,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 7,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 4,
+          "mid": 3,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [3..4], profundidade=2"
+    },
+    {
+      "step": 18,
+      "algorithm": "recursive",
+      "current_idx": 3,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 3,
+      "active_end": 3,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 7,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 4,
+          "mid": 3,
+          "partial_result": null,
+          "depth": 2
+        },
+        {
+          "frame_id": 8,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 3,
+          "mid": null,
+          "partial_result": null,
+          "depth": 3
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [3..3], profundidade=3"
+    },
+    {
+      "step": 19,
+      "algorithm": "recursive",
+      "current_idx": 3,
+      "max_current": 0,
+      "max_global": 0,
+      "active_start": 3,
+      "active_end": 3,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 7,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 4,
+          "mid": 3,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "pop",
+      "annotation": "POP (Caso Base): elemento unitário A[3] = 0"
+    },
+    {
+      "step": 20,
+      "algorithm": "recursive",
+      "current_idx": 4,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 4,
+      "active_end": 4,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 7,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 4,
+          "mid": 3,
+          "partial_result": null,
+          "depth": 2
+        },
+        {
+          "frame_id": 9,
+          "fn_name": "_max_subarray_rec",
+          "low": 4,
+          "high": 4,
+          "mid": null,
+          "partial_result": null,
+          "depth": 3
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [4..4], profundidade=3"
+    },
+    {
+      "step": 21,
+      "algorithm": "recursive",
+      "current_idx": 4,
+      "max_current": 3,
+      "max_global": 3,
+      "active_start": 4,
+      "active_end": 4,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 7,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 4,
+          "mid": 3,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "pop",
+      "annotation": "POP (Caso Base): elemento unitário A[4] = 3"
+    },
+    {
+      "step": 22,
+      "algorithm": "recursive",
+      "current_idx": 3,
+      "max_current": 0,
+      "max_global": 0,
+      "active_start": 3,
+      "active_end": 3,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 7,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 4,
+          "mid": 3,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à esquerda: A[3] = 0, acumulado = 0, melhor à esquerda = 0"
+    },
+    {
+      "step": 23,
+      "algorithm": "recursive",
+      "current_idx": 4,
+      "max_current": 3,
+      "max_global": 3,
+      "active_start": 4,
+      "active_end": 4,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 7,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 4,
+          "mid": 3,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à direita: A[4] = 3, acumulado = 3, melhor à direita = 3"
+    },
+    {
+      "step": 24,
+      "algorithm": "recursive",
+      "current_idx": null,
+      "max_current": 3,
+      "max_global": 3,
+      "active_start": 4,
+      "active_end": 4,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "pop",
+      "annotation": "POP: Retorno do intervalo [3..4]: melhor soma = 3 em [4..4]"
+    },
+    {
+      "step": 25,
+      "algorithm": "recursive",
+      "current_idx": 5,
+      "max_current": null,
+      "max_global": 0,
+      "active_start": 5,
+      "active_end": 5,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        },
+        {
+          "frame_id": 10,
+          "fn_name": "_max_subarray_rec",
+          "low": 5,
+          "high": 5,
+          "mid": null,
+          "partial_result": null,
+          "depth": 2
+        }
+      ],
+      "event_type": "push",
+      "annotation": "PUSH: Iniciando recursão no intervalo [5..5], profundidade=2"
+    },
+    {
+      "step": 26,
+      "algorithm": "recursive",
+      "current_idx": 5,
+      "max_current": -2,
+      "max_global": -2,
+      "active_start": 5,
+      "active_end": 5,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "pop",
+      "annotation": "POP (Caso Base): elemento unitário A[5] = -2"
+    },
+    {
+      "step": 27,
+      "algorithm": "recursive",
+      "current_idx": 4,
+      "max_current": 3,
+      "max_global": 3,
+      "active_start": 4,
+      "active_end": 4,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à esquerda: A[4] = 3, acumulado = 3, melhor à esquerda = 3"
+    },
+    {
+      "step": 28,
+      "algorithm": "recursive",
+      "current_idx": 3,
+      "max_current": 3,
+      "max_global": 3,
+      "active_start": 3,
+      "active_end": 4,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à esquerda: A[3] = 0, acumulado = 3, melhor à esquerda = 3"
+    },
+    {
+      "step": 29,
+      "algorithm": "recursive",
+      "current_idx": 5,
+      "max_current": -2,
+      "max_global": -2,
+      "active_start": 5,
+      "active_end": 5,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        },
+        {
+          "frame_id": 6,
+          "fn_name": "_max_subarray_rec",
+          "low": 3,
+          "high": 5,
+          "mid": 4,
+          "partial_result": null,
+          "depth": 1
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à direita: A[5] = -2, acumulado = -2, melhor à direita = -2"
+    },
+    {
+      "step": 30,
+      "algorithm": "recursive",
+      "current_idx": null,
+      "max_current": 3,
+      "max_global": 3,
+      "active_start": 4,
+      "active_end": 4,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "pop",
+      "annotation": "POP: Retorno do intervalo [3..5]: melhor soma = 3 em [4..4]"
+    },
+    {
+      "step": 31,
+      "algorithm": "recursive",
+      "current_idx": 2,
+      "max_current": 2,
+      "max_global": 2,
+      "active_start": 2,
+      "active_end": 2,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à esquerda: A[2] = 2, acumulado = 2, melhor à esquerda = 2"
+    },
+    {
+      "step": 32,
+      "algorithm": "recursive",
+      "current_idx": 1,
+      "max_current": 1,
+      "max_global": 2,
+      "active_start": 1,
+      "active_end": 2,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à esquerda: A[1] = -1, acumulado = 1, melhor à esquerda = 2"
+    },
+    {
+      "step": 33,
+      "algorithm": "recursive",
+      "current_idx": 0,
+      "max_current": 1,
+      "max_global": 2,
+      "active_start": 0,
+      "active_end": 2,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à esquerda: A[0] = 0, acumulado = 1, melhor à esquerda = 2"
+    },
+    {
+      "step": 34,
+      "algorithm": "recursive",
+      "current_idx": 3,
+      "max_current": 0,
+      "max_global": 0,
+      "active_start": 3,
+      "active_end": 3,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à direita: A[3] = 0, acumulado = 0, melhor à direita = 0"
+    },
+    {
+      "step": 35,
+      "algorithm": "recursive",
+      "current_idx": 4,
+      "max_current": 3,
+      "max_global": 3,
+      "active_start": 3,
+      "active_end": 4,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à direita: A[4] = 3, acumulado = 3, melhor à direita = 3"
+    },
+    {
+      "step": 36,
+      "algorithm": "recursive",
+      "current_idx": 5,
+      "max_current": 1,
+      "max_global": 3,
+      "active_start": 3,
+      "active_end": 5,
+      "call_stack": [
+        {
+          "frame_id": 0,
+          "fn_name": "_max_subarray_rec",
+          "low": 0,
+          "high": 5,
+          "mid": 2,
+          "partial_result": null,
+          "depth": 0
+        }
+      ],
+      "event_type": "step",
+      "annotation": "Cruzamento à direita: A[5] = -2, acumulado = 1, melhor à direita = 3"
+    },
+    {
+      "step": 37,
+      "algorithm": "recursive",
+      "current_idx": null,
+      "max_current": 5,
+      "max_global": 5,
+      "active_start": 2,
+      "active_end": 4,
+      "call_stack": [],
+      "event_type": "pop",
+      "annotation": "POP: Retorno do intervalo [0..5]: melhor soma = 5 em [2..4]"
+    },
+    {
+      "step": 38,
+      "algorithm": "recursive",
+      "current_idx": null,
+      "max_current": 5,
+      "max_global": 5,
+      "active_start": 2,
+      "active_end": 4,
+      "call_stack": [],
+      "event_type": "result",
+      "annotation": "Execução recursiva finalizada. Soma máxima = 5 no intervalo [2..4]."
+    }
+  ]
+}

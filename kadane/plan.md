@@ -14,7 +14,7 @@
 | 1 | Modelagem de Dados, Interfaces e Algoritmos Core | `types.py`, `iterative.py`, `recursive.py`, `tracer.py` | `[x]` |
 | 2 | Bateria de Testes e Garantia de Equivalência | `test_iterative.py`, `test_recursive.py`, `test_equivalence.py` | `[x]` |
 | 3 | Framework de Benchmarking e Métricas Empíricas | `runner.py`, `plot.py`, `results/` | `[x]` |
-| 4 | Visualizador Web Interativo Standalone | `index.html`, `app.js`, `style.css` | `[ ]` |
+| 4 | Visualizador Web Interativo Standalone | `index.html`, `app.js`, `style.css` | `[x]` |
 | 5 | Documentação, Integração e Apresentação Final | `README.md` (atualizado), `requirements.txt`, roteiro oral | `[ ]` |
 
 ---
@@ -496,13 +496,13 @@ Exibir os campos do `StepEvent` atual em tempo real:
 > **Nota sobre Customizado:** No modo customizado, exibir um `<textarea>` para o usuário colar um array JSON. Um botão "Gerar Trace" deve ser desabilitado com uma tooltip explicando que requer rodar o script Python — a UI não executa código Python.
 
 **DoD da Fase 4:**
-- [ ] `index.html` abre corretamente no Chrome/Firefox sem servidor (protocolo `file://`).
-- [ ] Todos os 5 controles de reprodução funcionam corretamente.
-- [ ] Ao mudar de cenário/algoritmo, o trace correto é carregado e a animação reinicia.
-- [ ] A Call Stack Inspector anima push/pop visivelmente.
-- [ ] O Array Visualizer colore corretamente `current_idx`, `active_start`→`active_end` e resultado final.
-- [ ] A UI não trava com arrays de até 50 elementos (número máximo nos traces de demonstração).
-- [ ] Testado nos navegadores Chrome e Firefox (últimas versões estáveis).
+- [x] `index.html` abre corretamente no Chrome/Firefox sem servidor (protocolo `file://`).
+- [x] Todos os 5 controles de reprodução funcionam corretamente.
+- [x] Ao mudar de cenário/algoritmo, o trace correto é carregado e a animação reinicia.
+- [x] A Call Stack Inspector anima push/pop visivelmente.
+- [x] O Array Visualizer colore corretamente `current_idx`, `active_start`→`active_end` e resultado final.
+- [x] A UI não trava com arrays de até 50 elementos (número máximo nos traces de demonstração).
+- [x] Testado nos navegadores Chrome e Firefox (últimas versões estáveis).
 
 ---
 
@@ -609,12 +609,12 @@ Fase 3 — Benchmarks
 [x] plot.py gera grafico_tempo.png e grafico_memoria.png
 
 Fase 4 — Visualizador
-[ ] index.html standalone com layout 3 colunas
-[ ] app.js com 5 controles + speed slider + seletor de cenário
-[ ] Call Stack Inspector com animação push/pop
-[ ] Array Visualizer com colorização dinâmica
-[ ] style.css com estilos da pilha e células
-[ ] 4 traces JSON de demonstração gerados em data/
+[x] index.html standalone com layout 3 colunas
+[x] app.js com 5 controles + speed slider + seletor de cenário
+[x] Call Stack Inspector com animação push/pop
+[x] Array Visualizer com colorização dinâmica
+[x] style.css com estilos da pilha e células
+[x] 4 traces JSON de demonstração gerados em data/
 
 Fase 5 — Documentação
 [ ] requirements.txt criado
