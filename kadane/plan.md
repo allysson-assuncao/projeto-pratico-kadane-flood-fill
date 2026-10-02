@@ -12,7 +12,7 @@
 | # | Fase | Arquivos Principais | Status |
 |---|------|----------------------|--------|
 | 1 | Modelagem de Dados, Interfaces e Algoritmos Core | `types.py`, `iterative.py`, `recursive.py`, `tracer.py` | `[x]` |
-| 2 | Bateria de Testes e Garantia de Equivalência | `test_iterative.py`, `test_recursive.py`, `test_equivalence.py` | `[ ]` |
+| 2 | Bateria de Testes e Garantia de Equivalência | `test_iterative.py`, `test_recursive.py`, `test_equivalence.py` | `[x]` |
 | 3 | Framework de Benchmarking e Métricas Empíricas | `runner.py`, `plot.py`, `results/` | `[ ]` |
 | 4 | Visualizador Web Interativo Standalone | `index.html`, `app.js`, `style.css` | `[ ]` |
 | 5 | Documentação, Integração e Apresentação Final | `README.md` (atualizado), `requirements.txt`, roteiro oral | `[ ]` |
@@ -294,11 +294,11 @@ $$\text{kadane\_iterative}(A).\text{max\_sum} = \text{kadane\_recursive}(A).\tex
 - O teste falha se qualquer par divergir.
 
 **DoD da Fase 2:**
-- [ ] `pytest kadane/tests/` passa com 0 falhas e 0 erros.
-- [ ] Cobertura de código (`pytest --cov=kadane.src`) $\geq$ 90% em `iterative.py`, `recursive.py` e `tracer.py`.
-- [ ] Todos os 10 cenários manuais cobertos em ambos os arquivos de teste.
-- [ ] Invariante de equivalência validada para 200+ casos aleatórios reproduzíveis.
-- [ ] Eventos de tracer validados (push/pop balanceados para recursivo).
+- [x] `pytest kadane/tests/` passa com 0 falhas e 0 erros.
+- [x] Cobertura de código (`pytest --cov=kadane.src`) $\geq$ 90% em `iterative.py`, `recursive.py` e `tracer.py`.
+- [x] Todos os 10 cenários manuais cobertos em ambos os arquivos de teste.
+- [x] Invariante de equivalência validada para 200+ casos aleatórios reproduzíveis.
+- [x] Eventos de tracer validados (push/pop balanceados para recursivo).
 
 ---
 
@@ -597,10 +597,10 @@ Fase 1 — Core
 [x] tracer.py com ExecutionTracer (record, get_trace, to_json, save, reset)
 
 Fase 2 — Testes
-[ ] test_iterative.py com 10 cenários + testes de tracer
-[ ] test_recursive.py com 10 cenários + testes de tracer
-[ ] test_equivalence.py com 200+ casos aleatórios
-[ ] Cobertura >= 90% confirmada
+[x] test_iterative.py com 10 cenários + testes de tracer
+[x] test_recursive.py com 10 cenários + testes de tracer
+[x] test_equivalence.py com 200+ casos aleatórios
+[x] Cobertura >= 90% confirmada
 
 Fase 3 — Benchmarks
 [ ] runner.py coleta tempo, memória, profundidade de pilha
