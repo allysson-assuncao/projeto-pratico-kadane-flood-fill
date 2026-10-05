@@ -39,7 +39,7 @@ Demonstrar, teórica e experimentalmente, que o **Problema da Soma Máxima de Su
   2. Destaque o momento em que o algoritmo processa o `1` (índice 1): o acumulado anterior era `-2`, logo o algoritmo reinicia o subarranjo em `1`.
   3. Destaque o índice 3 (valor `4`): o acumulado anterior era `-2`, reinicia em `4` e atinge a soma máxima `6` no intervalo `[3..6]`.
   4. Aponte para a coluna **Call Stack**: ela permanece com **1 único frame constante**, evidenciando o espaço auxiliar $O(1)$.
-  5. **Momento Interativo:** Digite na barra superior um vetor sugerido pelo professor/banca (ex: `[10, -5, 20, -30, 15]`) e clique em **Visualizar**. Mostre a computação instantânea no próprio navegador!
+  5. **Momento Interativo:** Digite na barra superior um vetor (ex: `[10, -5, 20, -30, 15]`) e clique em **Visualizar**. Mostre a computação instantânea no próprio navegador!
 
 ### Tópico 3: Demonstração Prática — Divisão e Conquista (2.5 min)
 - **Ação:** No mesmo visualizador, alternar para o botão **Recursivo (D&C)**.
