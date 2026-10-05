@@ -15,10 +15,10 @@ O desenvolvimento seguiu rigorosamente o plano estabelecido em [`kadane/plan.md`
 | Fase | Escopo | Entregas Técnicas | Resultado Obtido |
 | :---: | :--- | :--- | :---: |
 | **Fase 1** | **Core Algorítmico & Contratos** | `src/types.py`, `src/iterative.py`, `src/recursive.py`, `src/tracer.py` | Implementação pura de Kadane $O(n)$ / $O(1)$ e Divisão e Conquista $O(n \log n)$ / $O(\log n)$ com coletor desacoplado de eventos. |
-| **Fase 2** | **Testes Automatizados & Equivalência** | `tests/test_iterative.py`, `tests/test_recursive.py`, `tests/test_equivalence.py` | **100% de cobertura de código** (181/181 statements); 34 testes aprovados; equivalência comprovada em 200+ vetores aleatórios. |
+| **Fase 2** | **Testes Automatizados & Equivalência** | `tests/test_iterative.py`, `tests/test_recursive.py`, `tests/test_equivalence.py`, `tests/test_cli.py` | **100% de cobertura de código**; 49 testes aprovados; equivalência formal comprovada em 200+ vetores aleatórios. |
 | **Fase 3** | **Framework de Benchmarking** | `benchmarks/runner.py`, `benchmarks/plot.py`, `benchmarks/results/` | 30 rodadas de medições com `perf_counter` e `tracemalloc` em $N \in [10..100.000]$. Geração de `report.md`, `table.tex` e gráficos PNG em alta resolução. |
-| **Fase 4** | **Visualizador Web Interativo** | `visualizer/index.html`, `visualizer/app.js`, `visualizer/style.css`, `data/` | Aplicação web standalone funcional offline (`file://`), com controles de reprodução, inspeção dinâmica do vetor e **Call Stack Inspector animado** com push/pop. |
-| **Fase 5** | **Documentação & Apresentação Oral** | `README.md`, `requirements.txt`, `APRESENTACAO.md`, `scripts/generate_traces.py` | Guia completo de reprodução ponta a ponta e roteiro estruturado de apresentação oral de 10-12 minutos. |
+| **Fase 4** | **Visualizador Web Interativo** | `visualizer/index.html`, `visualizer/app.js`, `visualizer/style.css`, `data/` | Aplicação web standalone funcional offline (`file://`), com controles de reprodução, input de vetores customizados e **Call Stack Inspector animado** com push/pop em tempo real. |
+| **Fase 5** | **Interface CLI & Documentação Formal** | `src/cli.py`, `__main__.py`, `README.md`, `APRESENTACAO.md`, `scripts/generate_traces.py` | CLI completa com REPL e flags (`--array`, `--verbose`), prova formal de invariante de laço e análise de profundidade balanceada de pilha ($O(\log n)$ vs linear $O(n)$). |
 
 ---
 
@@ -54,9 +54,9 @@ Para auditar e demonstrar todo o sistema funcionando na sua máquina, siga este 
 ### Validação 1: Testes Unitários e Cobertura (Terminal)
 Execute o comando abaixo na raiz do projeto para comprovar a robustez algorítmica:
 ```powershell
-pytest kadane/tests/ -v --cov=kadane.src --cov-report=term-missing
+python -m pytest kadane/tests/ -v --cov=kadane.src --cov-report=term-missing
 ```
-- **O que observar:** Todos os 34 testes devem passar com `PASSED` e a tabela de cobertura deve indicar **100%** para todos os módulos (`iterative.py`, `recursive.py`, `tracer.py`, `types.py`).
+- **O que observar:** Todos os 49 testes devem passar com `PASSED` e a tabela de cobertura deve indicar **100%** para todos os módulos (`iterative.py`, `recursive.py`, `tracer.py`, `types.py`, `cli.py`).
 
 ---
 
@@ -71,20 +71,36 @@ python kadane/benchmarks/plot.py
   - Serão atualizados os arquivos em [`kadane/benchmarks/results/`](benchmarks/results/):
     - `report.md` (tabelas formatadas)
     - `table.tex` (tabela LaTeX para relatório)
-    - `grafico_tempo.png` e `grafico_memoria.png` (abra as imagens para checar a escala log-log e as curvas teóricas).
+    - `grafico_tempo.png` e `grafico_memoria.png`.
 
 ---
 
-### Validação 3: Visualizador Web Interativo (Navegador)
+### Validação 3: Visualizador Web Interativo e Vetores Customizados (Navegador)
 Abra a aplicação web com dois cliques ou via terminal:
 ```powershell
 start kadane/visualizer/index.html
 ```
 - **O que testar:**
-  1. **Modo Iterativo:** Com o cenário *Canônico*, clique em **Play** (ou avance no **Next Step**). Veja o subarranjo ativo expandir em azul e reiniciar quando o acumulado fica negativo. Veja a coluna *Call Stack* fixada em 1 único frame ($O(1)$).
+  1. **Modo Iterativo:** Com o cenário *Canônico*, clique em **Play** (ou avance no **Next Step**). Veja o subarranjo ativo expandir em azul e reiniciar quando o acumulado fica negativo.
   2. **Modo Recursivo:** Alterne para **Recursivo (D&C)**. Clique em **Play**. Observe os blocos da *Call Stack* empilhando verticalmente (**PUSH**) e desempilhando com os resultados parciais (**POP**).
-  3. **Controles:** Altere o slider de velocidade (de 100ms a 1500ms) e teste os botões de *Reset* e *End*.
+  3. **Vetor Customizado:** Digite qualquer vetor na barra superior (ex: `1, -2, 3, 4, -1, 2`) e clique em **Visualizar**. O motor client-side gerará o rastro na hora sem requisição externa.
   4. **Cenários de Borda:** Selecione no dropdown os cenários *Apenas Negativos* e *Com Zeros* para verificar o comportamento dinâmico.
+
+---
+
+### Validação 4: Interface de Linha de Comando — CLI (Terminal)
+Execute a CLI para testes rápidos com arrays arbitrários via console:
+```powershell
+# Execução direta com vetor específico
+python -m kadane --array "[-2, 1, -3, 4, -1, 2, 1, -5, 4]"
+
+# Exibição detalhada com rastreamento passo a passo
+python -m kadane --array "5, -2, 7, -1, 3" --verbose
+
+# Console interativo contínuo (REPL para apresentação ao vivo)
+python -m kadane --interactive
+```
+- **O que observar:** A CLI exibirá a tabela comparativa com as fatias destacadas em cores, validação de equivalência estrita e speedup medido em microssegundos.
 
 ---
 

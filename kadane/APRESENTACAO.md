@@ -30,6 +30,7 @@ Demonstrar, teórica e experimentalmente, que o **Problema da Soma Máxima de Su
 - **Definição:** Dado um array $A$ de tamanho $n$, encontrar $i, j$ tal que $\sum_{k=i}^j A[k]$ seja máximo.
 - **O Dilema dos Negativos:** Se todos fossem positivos, somava-se tudo. Se todos forem negativos, o resultado ótimo é o maior elemento isolado. O desafio reside em saber quando carregar um número negativo temporário para colher um positivo maior adiante.
 - **A Sacada de Kadane:** Se o acumulado anterior for menor que zero ($max\_atual < 0$), ele nunca ajudará o elemento seguinte. Portanto, descarta-se o passado e reinicia o subarranjo.
+- **Invariante de Laço:** Mencione que a correção do algoritmo é provada indutivamente: a cada iteração $k$, $max\_current$ mantém a melhor soma terminando em $k-1$ e $max\_global$ a melhor soma contida em $A[0..k-1]$. Ao atingir $n$, temos a solução global garantida.
 
 ### Tópico 2: Demonstração Prática — Kadane Iterativo (2.5 min)
 - **Ação:** Abrir o visualizador no navegador (`kadane/visualizer/index.html`), selecionar o **Cenário Canônico** no modo **Iterativo**.
@@ -38,6 +39,7 @@ Demonstrar, teórica e experimentalmente, que o **Problema da Soma Máxima de Su
   2. Destaque o momento em que o algoritmo processa o `1` (índice 1): o acumulado anterior era `-2`, logo o algoritmo reinicia o subarranjo em `1`.
   3. Destaque o índice 3 (valor `4`): o acumulado anterior era `-2`, reinicia em `4` e atinge a soma máxima `6` no intervalo `[3..6]`.
   4. Aponte para a coluna **Call Stack**: ela permanece com **1 único frame constante**, evidenciando o espaço auxiliar $O(1)$.
+  5. **Momento Interativo:** Digite na barra superior um vetor sugerido pelo professor/banca (ex: `[10, -5, 20, -30, 15]`) e clique em **Visualizar**. Mostre a computação instantânea no próprio navegador!
 
 ### Tópico 3: Demonstração Prática — Divisão e Conquista (2.5 min)
 - **Ação:** No mesmo visualizador, alternar para o botão **Recursivo (D&C)**.
@@ -46,9 +48,15 @@ Demonstrar, teórica e experimentalmente, que o **Problema da Soma Máxima de Su
   2. Mostre o badge de profundidade atingindo múltiplos frames até bater no caso base unitário.
   3. Mostre os eventos de **POP** retornando os resultados parciais e a execução da sub-rotina de cruzamento central (`_max_crossing_subarray`).
   4. Enfatize: para resolver exatamente o mesmo problema, a recursão precisou de **64 passos e múltiplos registros de ativação na pilha**, enquanto o iterativo resolveu em apenas **10 passos com 1 frame**.
+  5. **Análise de Pilha:** Esclareça que a divisão e conquista é balanceada ($h = \lceil \log_2 n \rceil + 1$), por isso atinge apenas 19 frames para $100.000$ itens sem estouro de pilha no Python; contudo, a recombinação $\Theta(n)$ em cada nível penaliza o tempo assintótico em $\Theta(n \log n)$.
 
-### Tópico 4: Evidências Empíricas e Benchmarks (3 min)
-- **Ação:** Projetar os gráficos gerados em [`kadane/benchmarks/results/`](file:///C:/Users/anybo/Documents/Projects/projeto-pratico-kadane-flood-fill/kadane/benchmarks/results/).
+### Tópico 4: Evidências Empíricas e Demonstração via CLI (3 min)
+- **Ação 1 (Terminal ao Vivo):** Abra o PowerShell e execute a CLI:
+  ```powershell
+  python -m kadane --array "[-2, 1, -3, 4, -1, 2, 1, -5, 4]"
+  ```
+  Mostre a tabela ASCII formatada com a comparação instantânea de soma, fatias coloridas e o speedup calculado em tempo real.
+- **Ação 2 (Projeção dos Benchmarks):** Projetar os gráficos gerados em [`kadane/benchmarks/results/`](file:///C:/Users/anybo/Documents/Projects/projeto-pratico-kadane-flood-fill/kadane/benchmarks/results/).
 - **Destaques quantitativos dos testes reais (30 rodadas):**
   - **Tempo:** Para $N = 100$, o iterativo já é **7.17x mais rápido**. Para $N = 100.000$, o tempo iterativo é de apenas **0.026s** contra **0.297s** do recursivo (**Speedup de 11.22x**).
   - **Gráfico de Tempo (Log-Log):** A curva do Kadane cola na reta teórica $O(n)$, enquanto a Divisão e Conquista descola para cima seguindo a curva $O(n \log n)$.

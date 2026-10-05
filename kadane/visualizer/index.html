@@ -39,6 +39,7 @@
             <option value="allneg">Apenas Negativos: [-4, -1, -7, -2]</option>
             <option value="zeros">Com Zeros: [0, -1, 2, 0, 3, -2]</option>
             <option value="unitary">Unitário: [42]</option>
+            <option value="custom">★ Customizado (Inserir Vetor)</option>
           </select>
         </div>
 
@@ -53,6 +54,32 @@
       </div>
     </div>
   </header>
+
+  <!-- BARRA DE ENTRADA DE VETOR CUSTOMIZADO -->
+  <div class="bg-slate-100 border-b border-slate-200 py-2.5 px-4 shadow-inner">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-2 flex-1 min-w-[280px]">
+        <label for="customArrayInput" class="text-xs font-bold text-slate-700 whitespace-nowrap flex items-center gap-1">
+          <span>Vetor Customizado:</span>
+        </label>
+        <input
+          id="customArrayInput"
+          type="text"
+          placeholder="Ex: -2, 1, -3, 4, -1, 2, 1, -5, 4"
+          class="flex-1 bg-white text-xs font-mono text-slate-800 rounded-md px-3 py-1.5 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-xs"
+        />
+        <button
+          id="btnApplyCustom"
+          class="px-3 py-1.5 text-xs font-bold rounded-md bg-blue-600 hover:bg-blue-700 text-white shadow-sm transition-all whitespace-nowrap flex items-center gap-1"
+        >
+          <span>Visualizar</span>
+        </button>
+      </div>
+      <div id="customErrorMsg" class="hidden text-xs text-red-600 font-semibold flex items-center gap-1">
+        <!-- Alerta de erro de sintaxe -->
+      </div>
+    </div>
+  </div>
 
   <!-- CONTEÚDO PRINCIPAL (3 COLUNAS) -->
   <main class="max-w-7xl mx-auto px-4 py-6 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-6">

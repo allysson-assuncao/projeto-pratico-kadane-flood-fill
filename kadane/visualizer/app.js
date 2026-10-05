@@ -43,6 +43,332 @@ document.addEventListener("DOMContentLoaded", () => {
   const speedSlider = document.getElementById("speedSlider");
   const speedValue = document.getElementById("speedValue");
 
+  // Elementos do DOM para input customizado
+  const customArrayInput = document.getElementById("customArrayInput");
+  const btnApplyCustom = document.getElementById("btnApplyCustom");
+  const customErrorMsg = document.getElementById("customErrorMsg");
+
+  // =========================================================================
+  // GERAÇÃO CLIENT-SIDE DE TRACES (PARA VETORES CUSTOMIZADOS)
+  // =========================================================================
+  function showCustomError(msg) {
+    if (customErrorMsg) {
+      customErrorMsg.textContent = msg;
+      customErrorMsg.classList.remove("hidden");
+    }
+  }
+
+  function clearCustomError() {
+    if (customErrorMsg) {
+      customErrorMsg.textContent = "";
+      customErrorMsg.classList.add("hidden");
+    }
+  }
+
+  function parseCustomArray(raw) {
+    if (!raw || !raw.trim()) {
+      throw new Error("Por favor, digite um vetor não vazio.");
+    }
+    let cleaned = raw.trim().replace(/^[\[\(]\s*/, "").replace(/\s*[\]\)]$/, "");
+    if (!cleaned) {
+      throw new Error("O vetor não pode ser vazio.");
+    }
+    const tokens = cleaned.split(/[\s,]+/).filter(t => t.length > 0);
+    if (tokens.length === 0) {
+      throw new Error("O vetor não pode ser vazio.");
+    }
+    if (tokens.length > 40) {
+      throw new Error("Para melhor visualização na tela, limite o vetor a no máximo 40 números.");
+    }
+    const nums = [];
+    for (const t of tokens) {
+      const n = Number(t);
+      if (!Number.isInteger(n)) {
+        throw new Error(`Elemento inválido '${t}'. Digite apenas números inteiros.`);
+      }
+      nums.push(n);
+    }
+    return nums;
+  }
+
+  function generateClientIterativeTrace(arr) {
+    const n = arr.length;
+    let maxCurrent = arr[0];
+    let maxGlobal = arr[0];
+    let activeStart = 0;
+    let bestStart = 0;
+    let bestEnd = 0;
+
+    const steps = [];
+    let stepNum = 0;
+
+    // Inicialização no índice 0
+    steps.push({
+      step: stepNum++,
+      algorithm: "iterative",
+      current_idx: 0,
+      max_current: maxCurrent,
+      max_global: maxGlobal,
+      active_start: 0,
+      active_end: 0,
+      call_stack: [],
+      event_type: "step",
+      annotation: `Inicialização no elemento A[0] = ${arr[0]}`
+    });
+
+    for (let k = 1; k < n; k++) {
+      const val = arr[k];
+      let desc = "";
+      if (maxCurrent < 0) {
+        maxCurrent = val;
+        activeStart = k;
+        desc = `Reiniciou subarranjo em A[${k}] = ${val} (acumulado anterior era negativo)`;
+      } else {
+        maxCurrent += val;
+        desc = `Estendeu subarranjo somando A[${k}] = ${val} (novo acumulado = ${maxCurrent})`;
+      }
+
+      if (maxCurrent > maxGlobal) {
+        maxGlobal = maxCurrent;
+        bestStart = activeStart;
+        bestEnd = k;
+        desc += ` -> Novo recorde global: ${maxGlobal} no intervalo [${bestStart}..${bestEnd}]`;
+      }
+
+      steps.push({
+        step: stepNum++,
+        algorithm: "iterative",
+        current_idx: k,
+        max_current: maxCurrent,
+        max_global: maxGlobal,
+        active_start: activeStart,
+        active_end: k,
+        call_stack: [],
+        event_type: "step",
+        annotation: desc
+      });
+    }
+
+    // Resultado final
+    steps.push({
+      step: stepNum++,
+      algorithm: "iterative",
+      current_idx: null,
+      max_current: maxCurrent,
+      max_global: maxGlobal,
+      active_start: bestStart,
+      active_end: bestEnd,
+      call_stack: [],
+      event_type: "result",
+      annotation: `Execução finalizada com sucesso. Soma máxima = ${maxGlobal} no intervalo [${bestStart}..${bestEnd}].`
+    });
+
+    return {
+      algorithm: "iterative",
+      input_array: arr,
+      final_result: {
+        max_sum: maxGlobal,
+        start_idx: bestStart,
+        end_idx: bestEnd
+      },
+      steps: steps
+    };
+  }
+
+  function generateClientRecursiveTrace(arr) {
+    const steps = [];
+    let stepNum = 0;
+    let frameIdCounter = 0;
+    const callStack = [];
+    let maxGlobal = -Infinity;
+    let bestStart = 0;
+    let bestEnd = 0;
+
+    function pushFrame(fnName, low, high, mid, depth) {
+      const frame = {
+        frame_id: frameIdCounter++,
+        fn_name: fnName,
+        low: low,
+        high: high,
+        mid: mid,
+        partial_result: null,
+        depth: depth
+      };
+      callStack.push(frame);
+      return frame;
+    }
+
+    function popFrame(partialResult) {
+      if (callStack.length === 0) return null;
+      const f = callStack.pop();
+      f.partial_result = partialResult ? {
+        max_sum: partialResult.max_sum,
+        start_idx: partialResult.start_idx,
+        end_idx: partialResult.end_idx
+      } : null;
+      return f;
+    }
+
+    function getStackSnapshot() {
+      return callStack.map(f => ({ ...f }));
+    }
+
+    function maxCrossingSubarray(low, mid, high) {
+      let leftSum = -Infinity;
+      let curr = 0;
+      let maxLeft = mid;
+      for (let i = mid; i >= low; i--) {
+        curr += arr[i];
+        if (curr > leftSum) {
+          leftSum = curr;
+          maxLeft = i;
+        }
+      }
+
+      let rightSum = -Infinity;
+      curr = 0;
+      let maxRight = mid + 1;
+      for (let j = mid + 1; j <= high; j++) {
+        curr += arr[j];
+        if (curr > rightSum) {
+          rightSum = curr;
+          maxRight = j;
+        }
+      }
+
+      return {
+        max_sum: leftSum + rightSum,
+        start_idx: maxLeft,
+        end_idx: maxRight
+      };
+    }
+
+    function solve(low, high, depth) {
+      const mid = low === high ? null : Math.floor((low + high) / 2);
+      pushFrame("_solve", low, high, mid, depth);
+
+      steps.push({
+        step: stepNum++,
+        algorithm: "recursive",
+        current_idx: mid !== null ? mid : low,
+        max_current: null,
+        max_global: maxGlobal === -Infinity ? arr[low] : maxGlobal,
+        active_start: low,
+        active_end: high,
+        call_stack: getStackSnapshot(),
+        event_type: "push",
+        annotation: `PUSH: Iniciando recursão no intervalo [${low}..${high}], profundidade=${depth}`
+      });
+
+      let res;
+      if (low === high) {
+        res = { max_sum: arr[low], start_idx: low, end_idx: low };
+        if (res.max_sum > maxGlobal) {
+          maxGlobal = res.max_sum;
+          bestStart = low;
+          bestEnd = low;
+        }
+        popFrame(res);
+        steps.push({
+          step: stepNum++,
+          algorithm: "recursive",
+          current_idx: low,
+          max_current: res.max_sum,
+          max_global: maxGlobal,
+          active_start: low,
+          active_end: low,
+          call_stack: getStackSnapshot(),
+          event_type: "pop",
+          annotation: `POP: Caso base unitário em A[${low}] = ${arr[low]}`
+        });
+        return res;
+      }
+
+      const leftRes = solve(low, mid, depth + 1);
+      const rightRes = solve(mid + 1, high, depth + 1);
+      const crossRes = maxCrossingSubarray(low, mid, high);
+
+      // Escolhe o melhor entre esquerda, direita e cruzamento
+      res = leftRes;
+      if (rightRes.max_sum > res.max_sum) res = rightRes;
+      if (crossRes.max_sum > res.max_sum) res = crossRes;
+
+      if (res.max_sum > maxGlobal) {
+        maxGlobal = res.max_sum;
+        bestStart = res.start_idx;
+        bestEnd = res.end_idx;
+      }
+
+      popFrame(res);
+      steps.push({
+        step: stepNum++,
+        algorithm: "recursive",
+        current_idx: mid,
+        max_current: res.max_sum,
+        max_global: maxGlobal,
+        active_start: res.start_idx,
+        active_end: res.end_idx,
+        call_stack: getStackSnapshot(),
+        event_type: "pop",
+        annotation: `POP: Retorno da chamada [${low}..${high}]. Melhor: soma=${res.max_sum} em [${res.start_idx}..${res.end_idx}]`
+      });
+
+      return res;
+    }
+
+    const finalRes = solve(0, arr.length - 1, 0);
+
+    steps.push({
+      step: stepNum++,
+      algorithm: "recursive",
+      current_idx: null,
+      max_current: finalRes.max_sum,
+      max_global: finalRes.max_sum,
+      active_start: finalRes.start_idx,
+      active_end: finalRes.end_idx,
+      call_stack: [],
+      event_type: "result",
+      annotation: `Divisão e Conquista finalizada. Soma máxima = ${finalRes.max_sum} no intervalo [${finalRes.start_idx}..${finalRes.end_idx}].`
+    });
+
+    return {
+      algorithm: "recursive",
+      input_array: arr,
+      final_result: finalRes,
+      steps: steps
+    };
+  }
+
+  function handleApplyCustom() {
+    clearCustomError();
+    const raw = customArrayInput ? customArrayInput.value : "";
+    try {
+      const arr = parseCustomArray(raw);
+      if (!window.KADANE_TRACES) {
+        window.KADANE_TRACES = {};
+      }
+      window.KADANE_TRACES["iterative_custom"] = generateClientIterativeTrace(arr);
+      window.KADANE_TRACES["recursive_custom"] = generateClientRecursiveTrace(arr);
+
+      currentScenario = "custom";
+      if (scenarioSelect) scenarioSelect.value = "custom";
+      loadTrace();
+    } catch (err) {
+      showCustomError(err.message);
+    }
+  }
+
+  if (btnApplyCustom) {
+    btnApplyCustom.addEventListener("click", handleApplyCustom);
+  }
+  if (customArrayInput) {
+    customArrayInput.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        handleApplyCustom();
+      }
+    });
+  }
+
   // =========================================================================
   // CARREGAMENTO DO RASTRO (TRACE)
   // =========================================================================
@@ -365,6 +691,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   scenarioSelect.addEventListener("change", (e) => {
     currentScenario = e.target.value;
+    if (currentScenario === "custom") {
+      if (!window.KADANE_TRACES || !window.KADANE_TRACES[`${currentAlgorithm}_custom`]) {
+        if (customArrayInput && !customArrayInput.value.trim()) {
+          customArrayInput.value = "-2, 1, -3, 4, -1, 2, 1, -5, 4";
+        }
+        handleApplyCustom();
+        return;
+      }
+    }
     loadTrace();
   });
 
