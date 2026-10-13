@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 if TYPE_CHECKING:
     from benchmarks.runner import BenchmarkRow
 
-
 class BenchmarkPlotter:
     """Gera visualizações gráficas de tempo de execução e consumo de heap."""
 
@@ -38,9 +37,8 @@ class BenchmarkPlotter:
             marker="o",
             color="#1f77b4",
             linewidth=2.2,
-            label="Iterativo (BFS / Heap) — O(V + E)",
+            label="Iterativo (DFS / Pilha no Heap) — O(V + E)",
         )
-
         if rec_times:
             plt.plot(
                 rec_cells,
@@ -68,7 +66,7 @@ class BenchmarkPlotter:
         plt.yscale("log")
         plt.xlabel("Quantidade de Células ($N \\times N$)", fontsize=11, fontweight="bold")
         plt.ylabel("Tempo Médio de Execução (s) — Escala Log", fontsize=11, fontweight="bold")
-        plt.title("Comparativo de Tempo: Flood Fill Iterativo vs. Recursivo", fontsize=13, fontweight="bold", pad=12)
+        plt.title("Comparativo de Tempo: Flood Fill Iterativo vs. Recursivo (DFS)", fontsize=13, fontweight="bold", pad=12)
         plt.legend(frameon=True, facecolor="white", framealpha=0.9, fontsize=9)
         plt.tight_layout()
         plt.savefig(save_path)
@@ -90,9 +88,8 @@ class BenchmarkPlotter:
             marker="o",
             color="#1f77b4",
             linewidth=2.2,
-            label="Iterativo (Alocação de Heap / deque)",
+            label="Iterativo (Alocação de Heap / Pilha Explícita)",
         )
-
         if rec_mems:
             plt.plot(
                 rec_cells,
@@ -100,7 +97,7 @@ class BenchmarkPlotter:
                 marker="^",
                 color="#d62728",
                 linewidth=2.2,
-                label="Recursivo (Alocação de Stack Frames)",
+                label="Recursivo (Heap / Instanciação de PyFrameObjects)",
             )
 
         plt.xscale("log")

@@ -16,14 +16,12 @@ RESULTS_DIR = Path(__file__).parent / "results"
 GRID_SIZES: list[int] = [10, 20, 25, 30, 50, 80]
 NUM_ROUNDS: int = 15
 
-
 @dataclass(frozen=True)
 class ExecutionStats:
     mean_time_s: float | None
     stdev_time_s: float | None
     peak_memory_kb: float | None
     recursion_error: bool = False
-
 
 @dataclass(frozen=True)
 class BenchmarkRow:
@@ -33,7 +31,8 @@ class BenchmarkRow:
     recursive: ExecutionStats
 
     @property
-    def speedup(self) -> float | None:
+    def speedup_iter_vs_rec(self) -> float | None:
+        """Calcula a razão T_rec / T_iter (> 1.0 indica vantagem para a abordagem iterativa)."""
         if (
             self.iterative.mean_time_s
             and self.recursive.mean_time_s
@@ -42,9 +41,8 @@ class BenchmarkRow:
             return self.recursive.mean_time_s / self.iterative.mean_time_s
         return None
 
-
 class FloodFillRunner:
-    """Executa medições empíricas comparativas entre implementações de Flood Fill."""
+    """Executa medições empíricas comparativas entre implementações DFS de Flood Fill."""
 
     def __init__(self, sizes: list[int] = GRID_SIZES, rounds: int = NUM_ROUNDS) -> None:
         self._sizes = sizes
@@ -59,10 +57,8 @@ class FloodFillRunner:
         for size in self._sizes:
             cells = size * size
             print(f"Executando N={size}x{size} ({cells:,} células)...")
-
             iter_stats = self._benchmark_strategy(self._iterative_strategy, size)
             rec_stats = self._benchmark_strategy(self._recursive_strategy, size)
-
             rows.append(
                 BenchmarkRow(
                     dimension=size,
@@ -81,24 +77,27 @@ class FloodFillRunner:
         peaks: list[float] = []
 
         try:
-            # Warm-up de cache
+            # Warm-up
             warmup_grid = self._create_grid(size)
             strategy.fill(warmup_grid, Point(0, 0), target_color=1)
 
+            # 1. Medição isolada de tempo de CPU
             for _ in range(self._rounds):
-                # 1. Medição isolada de tempo de CPU
                 test_grid = self._create_grid(size)
                 t0 = time.perf_counter()
                 strategy.fill(test_grid, Point(0, 0), target_color=1)
                 times.append(time.perf_counter() - t0)
 
-                # 2. Medição isolada de alocação de Heap
+            # 2. Medição isolada de pico de memória de Heap
+            for _ in range(self._rounds):
                 mem_grid = self._create_grid(size)
                 tracemalloc.start()
-                strategy.fill(mem_grid, Point(0, 0), target_color=1)
-                _, peak = tracemalloc.get_traced_memory()
-                tracemalloc.stop()
-                peaks.append(peak / 1024.0)
+                try:
+                    strategy.fill(mem_grid, Point(0, 0), target_color=1)
+                    _, peak = tracemalloc.get_traced_memory()
+                    peaks.append(peak / 1024.0)
+                finally:
+                    tracemalloc.stop()
 
             return ExecutionStats(
                 mean_time_s=statistics.mean(times),
@@ -106,9 +105,7 @@ class FloodFillRunner:
                 peak_memory_kb=max(peaks),
                 recursion_error=False,
             )
-
         except RecursionError:
-            tracemalloc.stop()
             return ExecutionStats(
                 mean_time_s=None,
                 stdev_time_s=None,
@@ -122,40 +119,41 @@ class FloodFillRunner:
 
     def _export_markdown_report(self, rows: list[BenchmarkRow], dest_path: Path) -> None:
         lines: list[str] = [
-            "# Relatório de Benchmark Comparativo — Flood Fill",
+            "# Relatório de Benchmark Comparativo — Flood Fill (DFS)",
             "",
             f"- **Data da Coleta:** {datetime.now().isoformat()}",
             f"- **Rodadas por Dimensão:** {self._rounds}",
             "- **Cenário de Teste:** Matriz homogênea (pior caso de conectividade completa)",
+            "- **Algoritmo Base:** DFS (Busca em Profundidade) — Pilha no Heap vs. Call Stack",
             "",
-            "## 1. Tabela Comparativa de Tempo de Execução e Speedup",
+            "## 1. Tabela Comparativa de Tempo de Execução e Aceleração",
             "",
-            "| Dimensão ($N$) | Total Células | Iterativo Média (s) | Iterativo Desvio Padrão | Recursivo Média (s) | Recursivo Desvio Padrão | Speedup (Iter/Rec) |",
+            "| Dimensão ($N$) | Total Células | Iterativo Média (s) | Iterativo Desvio Padrão | Recursivo Média (s) | Recursivo Desvio Padrão | Razão ($T_{rec} / T_{iter}$) |",
             "| :---: | :---: | :---: | :---: | :---: | :---: | :---: |",
         ]
 
         for r in rows:
             it_t = f"{r.iterative.mean_time_s:.6f}" if r.iterative.mean_time_s else "—"
             it_std = f"{r.iterative.stdev_time_s:.6f}" if r.iterative.stdev_time_s else "—"
-            
+
             if r.recursive.recursion_error:
                 rec_t = "**RecursionError**"
                 rec_std = "—"
-                speedup_str = "—"
+                ratio_str = "—"
             else:
                 rec_t = f"{r.recursive.mean_time_s:.6f}" if r.recursive.mean_time_s else "—"
                 rec_std = f"{r.recursive.stdev_time_s:.6f}" if r.recursive.stdev_time_s else "—"
-                speedup_str = f"**{r.speedup:.2f}x**" if r.speedup else "—"
+                ratio_str = f"**{r.speedup_iter_vs_rec:.2f}x**" if r.speedup_iter_vs_rec else "—"
 
             lines.append(
-                f"| {r.dimension}x{r.dimension} | {r.cells_count:,} | {it_t} | {it_std} | {rec_t} | {rec_std} | {speedup_str} |"
+                f"| {r.dimension}x{r.dimension} | {r.cells_count:,} | {it_t} | {it_std} | {rec_t} | {rec_std} | {ratio_str} |"
             )
 
         lines.extend([
             "",
-            "## 2. Tabela Comparativa de Consumo de Memória (Heap)",
+            "## 2. Tabela Comparativa de Alocação de Memória (Heap Tracing)",
             "",
-            "| Dimensão ($N$) | Total Células | Iterativo Pico (KB) | Recursivo Pico (KB) | Razão de Memória (Rec / Iter) |",
+            "| Dimensão ($N$) | Total Células | Iterativo Pico (KB) | Recursivo Pico (KB) | Razão ($Heap_{rec} / Heap_{iter}$) |",
             "| :---: | :---: | :---: | :---: | :---: |",
         ])
 
@@ -179,8 +177,9 @@ class FloodFillRunner:
             "",
             "## 3. Análise dos Resultados e Limites da Pilha",
             "",
-            "- **Estouro de Pilha (*Stack Overflow*):** Em Python, a profundidade padrão de chamadas (`sys.getrecursionlimit()`) é de 1000 frames. Matrizes acima de ~30x30 excedem este limiar quando a propagação em profundidade é homogênea.",
-            "- **Estabilidade Operacional:** A abordagem iterativa com fila (`collections.deque`) opera no Heap e não possui gargalo rígido de pilha de execução, completando execuções de larga escala sem falhas de runtime.",
+            "- **Estouro de Pilha (*Stack Overflow*):** Em Python, a profundidade padrão de chamadas (`sys.getrecursionlimit()`) é de 1000 frames. Matrizes a partir de ~30x30 excedem este limiar sob propagação homogênea.",
+            "- **Natureza da Memória Rasteada:** O `tracemalloc` contabiliza estruturas alocadas pelos gestores de memória do Python. O custo da recursão reflete a instanciação de objetos `PyFrameObject` no Heap do interpretador, enquanto a abordagem iterativa utiliza uma lista Python contígua dinâmica.",
+            "- **Estabilidade Operacional:** A abordagem iterativa com lista/pilha alocada no Heap não sofre a restrição imposta pelo interpretador para a pilha de recursão de funções, completando execuções de maior escala sem interrupção de runtime.",
             "",
         ])
 
